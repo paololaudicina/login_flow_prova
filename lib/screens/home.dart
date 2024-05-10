@@ -17,7 +17,8 @@ class home extends StatelessWidget {
           children: [
             IconButton(onPressed: () async{
               final sp = await SharedPreferences.getInstance();
-              await sp.remove('flag');
+              await sp.remove('accessToken');
+              await sp.remove('refreshToken');
               await sp.remove('DatiPersonali');
               
               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginPage())); // perchè il pushReplacemente e non il pop?

@@ -1,5 +1,6 @@
 import 'package:ex_3/screens/home.dart';
 import 'package:ex_3/screens/login.dart';
+import 'package:ex_3/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,25 +15,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   MaterialApp(
-      home: FutureBuilder(
-      future: SharedPreferences.getInstance() ,
-       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          
-          final sp=snapshot.data!;
-
-          if (sp.getBool('flag') != null ){
-            return  const home();
-          } else {
-            return  const LoginPage();
-          }
-        } else {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
-        }
-       })
+      home:  Splash()
       );
   }
 }
 
+// FutureBuilder(
+//       future: SharedPreferences.getInstance() ,
+//        builder: (context, snapshot) {
+//         if (snapshot.hasData) {
+          
+//           final sp=snapshot.data!;
+
+//           if (sp.getBool('flag') != null ){
+//             return  const home();
+//           } else {
+//             return  const LoginPage();
+//           }
+//         } else {
+//           return const Scaffold(
+//             body: Center(child: CircularProgressIndicator()),
+//           );
+//         }
+//        })

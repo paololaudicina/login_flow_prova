@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    print('${LoginPage.routename} built');
+    
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
             appBar: AppBar(
@@ -35,8 +35,8 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.red,),
 
               Expanded(
-
                 child: Container(
+                  height: 800,
                   decoration: BoxDecoration(
                 color: Colors.amber,
                 borderRadius: BorderRadius.only(
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                            padding: const  EdgeInsets.all(15.0),
                            child:  TextFormField(
                              validator: (String? value) {
-                              if (value!.isEmpty || value == null){
+                              if (value == null || value.isEmpty ){
                                 return 'inserisci un username';
                     
                               }else {
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                            padding:const  EdgeInsets.all(15.0),
                            child:  TextFormField(
                             validator: (String? value) {
-                              if (value!.isEmpty || value == null){
+                              if ( value == null || value.isEmpty ){
                                 return 'inserisci una password';
                     
                               }else {

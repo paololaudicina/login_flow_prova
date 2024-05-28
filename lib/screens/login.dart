@@ -169,9 +169,9 @@ class _LoginPageState extends State<LoginPage> {
                                         sp.setString('password',passwordController.text);
                                         bool flag = true;
                                         await sp.setBool('flag', flag );
-                                        if (sp.getBool('DatiPersonali') != null) {
+                                        if (sp.getInt('punteggio') != null) {
                                           
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  const Questionario()));
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  home()));
                                        }else {
                                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  Questionario()));
                                        }

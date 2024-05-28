@@ -20,7 +20,7 @@ class Splash extends StatelessWidget {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginPage()));
       }else{
         final response = Impact().refreshToken();
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> home()));
       }
     }else{
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginPage()));

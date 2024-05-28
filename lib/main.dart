@@ -1,11 +1,13 @@
+import 'package:ex_3/providers/provider.dart';
 import 'package:ex_3/screens/home.dart';
 import 'package:ex_3/screens/login.dart';
 import 'package:ex_3/screens/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-   runApp(const MyApp());
+   runApp( const MyApp());
 }
 
 class MyApp extends StatelessWidget {

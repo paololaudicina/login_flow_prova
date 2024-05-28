@@ -1,4 +1,5 @@
 import 'package:ex_3/screens/home.dart';
+import 'package:ex_3/screens/splashQuiz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,12 +36,12 @@ class _QuestionarioState extends State<Questionario> {
           margin: const EdgeInsets.all(10),
           child: ListTile(
             tileColor: isSelected ? Colors.green : Colors.blue,
-            title: Text(_quiz.quiz[quizIndex].options[0].answer[index]),
+            title: Text(_quiz.quiz[quizIndex].options.answer[index]),
             onTap: () => _changeColor(quizIndex, index),
           ),
         );
       },
-      itemCount: _quiz.quiz[quizIndex].options[0].answer.length,
+      itemCount: _quiz.quiz[quizIndex].options.answer.length,
     );
   }
   
@@ -99,25 +100,11 @@ class _QuestionarioState extends State<Questionario> {
                   ),
                 ),
               ),
-               Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:
-                    [ Text(_quiz.quiz[3].title),
-                      SizedBox(
-                        height: 400, // Imposta un'altezza per il ListView
-                        child: _listView(3),
-                      ),
-                    ]
-                  ),
-                ),
-              ),
+              
               ElevatedButton(onPressed: () async{
                final sp = await SharedPreferences.getInstance();
                await sp.setInt('punteggio',punteggio);
-               Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  home()));
+               Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SplashQuiz()));
 
               }, 
               child: Text('Save'))

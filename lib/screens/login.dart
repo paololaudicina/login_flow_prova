@@ -2,6 +2,7 @@
 import 'dart:ui';
 
 import 'package:ex_3/screens/datipersonali.dart';
+import 'package:ex_3/screens/questionario.dart';
 import 'package:ex_3/services/Impact.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
@@ -170,9 +171,9 @@ class _LoginPageState extends State<LoginPage> {
                                         await sp.setBool('flag', flag );
                                         if (sp.getBool('DatiPersonali') != null) {
                                           
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  const home()));
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  const Questionario()));
                                        }else {
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>   DatiPersonali()));
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  Questionario()));
                                        }
                                       }
                                       

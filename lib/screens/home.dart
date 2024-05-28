@@ -2,14 +2,40 @@ import 'package:ex_3/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class home extends StatelessWidget {
-   const home({super.key});
+class home extends StatefulWidget {
+    home({super.key});
 
   @override
+  State<home> createState() => _homeState();
+  
+
+}
+
+class _homeState extends State<home> {
+   
+
+  //  void livello () async {
+  @override
   Widget build(BuildContext context) {
+
     return  Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title:  FutureBuilder(
+          future: SharedPreferences.getInstance(),
+          builder: ((context,snapshot) {
+              if (snapshot.hasData) {
+                final sp = snapshot.data as SharedPreferences;
+                if (sp.getInt('punteggio')! > 3 ){
+                  return Text('sei hard');
+                } else{
+                  return Text('ciao');
+                }
+              }else {
+                return CircularProgressIndicator();
+              }
+          }),
+          
+        ),
         actions: [
           Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -45,3 +71,5 @@ class home extends StatelessWidget {
     );
   }
 }
+
+  

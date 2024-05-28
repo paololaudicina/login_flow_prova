@@ -80,7 +80,7 @@ class DatiPersonali extends StatelessWidget {
                   sp.setString('Name', nameController.text);
                   sp.setString('Surname', surnameController.text);
                   sp.setString('Email', emailController.text);
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  const home()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>   home()));
                   
                   
                 }else {
@@ -100,7 +100,7 @@ class DatiPersonali extends StatelessWidget {
                      const bool datiPersonali = true;
                       final sp = await SharedPreferences.getInstance();
                       sp.setBool('DatiPersonali', datiPersonali);
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  const home()));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>   home()));
 
 
                   },

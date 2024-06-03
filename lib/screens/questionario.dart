@@ -17,7 +17,7 @@ class Questionario extends StatefulWidget {
 class _QuestionarioState extends State<Questionario> {
   final _quiz = Quiz();
   Map<int, int?> _selectedIndexMap = {};
-  int punteggio =0;
+  int punteggio = 0;
 
   void _changeColor(int quizIndex, int optionIndex) {
     setState(() {
@@ -33,10 +33,26 @@ class _QuestionarioState extends State<Questionario> {
       itemBuilder: (context, index) {
         bool isSelected = _selectedIndexMap[quizIndex] == index;
         return Container(
+          decoration: BoxDecoration(
+            color: isSelected
+                ? Color.fromARGB(255, 31, 148, 244)
+                : Color.fromARGB(255, 41, 107, 249),
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 5.0,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
           margin: const EdgeInsets.all(10),
           child: ListTile(
-            tileColor: isSelected ? Colors.green : Colors.blue,
-            title: Text(_quiz.quiz[quizIndex].options.answer[index]),
+            // tileColor: isSelected ? Color.fromARGB(255, 31, 148, 244) : Color.fromARGB(255, 79, 41, 249),
+            title: Text(
+              _quiz.quiz[quizIndex].options.answer[index],
+              style: TextStyle(color: Colors.white),
+            ),
             onTap: () => _changeColor(quizIndex, index),
           ),
         );
@@ -44,75 +60,141 @@ class _QuestionarioState extends State<Questionario> {
       itemCount: _quiz.quiz[quizIndex].options.answer.length,
     );
   }
-  
+// Color.fromARGB(255, 43, 100, 244)
   @override
   Widget build(BuildContext context) {
-     
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top:100),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:
-                    [ Text(_quiz.quiz[0].title),
-                      SizedBox(
-                        height: 400, // Imposta un'altezza per il ListView
-                        child: _listView(0),
-                      ),
-                    ]
-                  ),
-                ),
-              ),
-               Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:
-                    [ Text(_quiz.quiz[1].title),
-                      SizedBox(
-                        height: 400, // Imposta un'altezza per il ListView
-                        child: _listView(1),
-                      ),
-                    ]
-                  ),
-                ),
-              ),
-               Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:
-                    [ Text(_quiz.quiz[2].title),
-                      SizedBox(
-                        height: 400, // Imposta un'altezza per il ListView
-                        child: _listView(2),
-                      ),
-                    ]
-                  ),
-                ),
-              ),
-              
-              ElevatedButton(onPressed: () async{
-               final sp = await SharedPreferences.getInstance();
-               await sp.setInt('punteggio',punteggio);
-               Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SplashQuiz()));
-
-              }, 
-              child: Text('Save'))
-            ],
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: Color.fromARGB(255, 53, 168, 245),
+          appBar: AppBar(
+            title: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('AUDIT TEST',
+                    style: TextStyle(fontSize: 40, color: Colors.black)),
+              ],
+            ),
+            backgroundColor: Color.fromARGB(255, 53, 168, 245),
           ),
-        ),
-      )
-
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Card(
+                    color: Color.fromARGB(255, 99, 56, 253),
+                    
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          15.0), // Imposta il raggio degli angoli del bordo
+                      side: BorderSide(
+                          color: Colors.black,
+                          width:
+                              2.0), // Imposta il colore e lo spessore del bordo
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top:50,left: 20,right: 20),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              _quiz.quiz[0].title,
+                              style: const TextStyle(
+                                  fontSize: 20, color: Colors.black),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: SizedBox(
+                                height: 450, // Imposta un'altezza per il ListView
+                                child: _listView(0),
+                              ),
+                            ),
+                          ]),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Card(
+                    color: Color.fromARGB(255, 41, 65, 249),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          15.0), // Imposta il raggio degli angoli del bordo
+                      side: BorderSide(
+                          color: Colors.black,
+                          width:
+                              2.0), // Imposta il colore e lo spessore del bordo
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top:50,left: 20,right: 20),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(_quiz.quiz[1].title,
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: SizedBox(
+                                height: 450, // Imposta un'altezza per il ListView
+                                child: _listView(1),
+                              ),
+                            ),
+                          ]),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Card(
+                    color: Color.fromARGB(255, 37, 6, 142),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          15.0), // Imposta il raggio degli angoli del bordo
+                      side: BorderSide(
+                          color: Colors.black,
+                          width:
+                              2.0), // Imposta il colore e lo spessore del bordo
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(top:50,left: 20,right: 20),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(_quiz.quiz[2].title,
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: SizedBox(
+                                height: 450, // Imposta un'altezza per il ListView
+                                child: _listView(2),
+                              ),
+                            ),
+                          ]),
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                    onPressed: () async {
+                      final sp = await SharedPreferences.getInstance();
+                      await sp.setInt('punteggio', punteggio);
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (_) => SplashQuiz()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            side: BorderSide(color: Colors.black))),
+                    child: Text(
+                      'Save',
+                      style: TextStyle(color: Colors.white),
+                    ))
+              ],
+            ),
+          )),
     );
   }
 }
